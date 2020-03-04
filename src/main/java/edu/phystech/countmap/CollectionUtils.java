@@ -24,6 +24,7 @@ public class CollectionUtils {
             }
             ++i;
         }
+        return -1;
     }
 
     public static<E> List<? extends E> limit(List<? extends E> source, int size) {
@@ -60,11 +61,23 @@ public class CollectionUtils {
         return k > 0;
     }
 
-    public static<E> List<? extends E> range(List<? extends E> list, E min, E max) {
-        return newArrayList();
+    public static<E extends Comparable> List<? super E> range(List<? extends E> list, E min, E max) {
+        List<? super E> newList = newArrayList();
+        for (E e : list) {
+            if (e.compareTo(min) >= 0 && e.compareTo(max) <= 0) {
+                newList.add(e);
+            }
+        }
+        return newList;
     }
 
-    public static<E> List<? extends E> range(List<? extends E> list, E min, E max, Comparator comparator) {
-        return newArrayList();
+    public static<E> List<? super E> range(List<? extends E> list, E min, E max, Comparator comparator) {
+        List<? super E> newList = newArrayList();
+        for (E e : list) {
+            if (comparator.compare(e, min) >= 0 && comparator.compare(e, max) <= 0) {
+                newList.add(e);
+            }
+        }
+        return newList;
     }
 }
