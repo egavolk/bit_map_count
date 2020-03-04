@@ -5,11 +5,15 @@ import java.util.Map;
 public interface CountMap<E> {
     void add(E key);
 
+    void remove(E key);
+
     int getCount(E key);
 
     void addAll(CountMap<? extends E> source);
 
-    void copyTo(CountMap<? super E> destination);
+    Map<E, Integer> toMap();
 
-    Map<E, Integer> asMap();
+    void toMap(Map<? super E, Integer> map);
+
+    int size();
 }
